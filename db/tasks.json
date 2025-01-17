@@ -1,5 +1,21 @@
-{
-  "tasks": "Pray",
-  "description": "I have to do this routine once I wake up",
-  "id": 1
-}
+[
+  {
+    "tasks": "Pray",
+    "description": "I have to do this routine once I wake up",
+    "id": 1
+  },
+  { "tasks": "Eat", "description": "Eat some light every morning", "id": 2 },
+  {
+    "tasks": "Go to work",
+    "description": "I have to leave for work latest 8:30am",
+    "id": 3
+  },
+  {
+    "tasks": "Go to the market",
+    "description": "If you don't go to the market, you will starve"
+  },
+  {
+    "tasks": "Call my shoe vendor",
+    "description": "I need to tell him about his reviews"
+  }
+]

@@ -73,8 +73,9 @@ function updateTask(req, res) {
         return;
       }
       const updatedTask = { ...tasksObj[taskIndex], ...detailsToUpdate };
+      tasksObj[taskIndex] = updatedTask;
 
-      fs.writeFile(tasksDbPath, JSON.stringify(updatedTask), (err) => {
+      fs.writeFile(tasksDbPath, JSON.stringify(tasksObj), (err) => {
         if (err) {
           console.log(err);
           res.writeHead(500);
