@@ -93,8 +93,57 @@ function updateTask(req, res) {
   });
 }
 
+// DELETING A TASK BY ID
+function deleteTask(req, res) {
+  const body = [];
+  req.on("data", (chunk) => {
+    body.push(chunk);
+  });
+
+  req.on("end", () => {
+    const parsedTask = Buffer.concat(body).toString();
+    const detailsToUpdate = JSON.parse(parsedTask);
+    const taskId = detailsToUpdate.id;
+
+    fs.readFile(tasksDbPath, "utf8", (err, tasks) => {
+      if (err) {
+        console.log(err);
+        res.writeHead(404);
+        res.end("An error occurred");
+      }
+
+      const tasksObj = JSON.parse(tasks);
+      const taskIndex = tasksObj.findIndex((task) => task.id === taskId);
+
+      if (taskIndex === -1) {
+        res.writeHead(404);
+        res.end("Task with the specified id not found!");
+        return;
+      }
+      //DELETE FUNCTION
+      tasksObj.splice(taskIndex, 1);
+
+      fs.writeFile(tasksDbPath, JSON.stringify(tasksObj), (err) => {
+        if (err) {
+          console.log(err);
+          res.writeHead(500);
+          res.end(
+            JSON.stringify({
+              message:
+                "Internal Server Error, Could not save task to Database.",
+            })
+          );
+        }
+        res.writeHead(200);
+        res.end(JSON.stringify("Task deleted successfully!"));
+      });
+    });
+  });
+}
+
 module.exports = {
   getAllTasks,
   addTask,
   updateTask,
+  deleteTask,
 };

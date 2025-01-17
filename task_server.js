@@ -9,6 +9,7 @@ const {
   getAllTasks,
   addTask,
   updateTask,
+  deleteTask,
 } = require("./controller/task_controller");
 
 const PORT = 4000;
@@ -27,7 +28,7 @@ function requestHandler(req, res) {
     updateTask(req, res);
   } else if (req.url === "/tasks" && req.method === "DELETE") {
     //DELETE
-    console.log("DELETE REQUEST TO TASK ROUTE");
+    deleteTask(req, res);
   }
 }
 // creation of the server

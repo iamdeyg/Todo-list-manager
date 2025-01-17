@@ -1,4 +1,4 @@
-const { getAllBooks } = require("./controller/task_controller");
+const { getAllTasks } = require("./controller/task_controller");
 
 module.exports = {
   taskRouter,
